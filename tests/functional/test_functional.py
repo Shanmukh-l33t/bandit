@@ -173,6 +173,28 @@ class FunctionalTests(testtools.TestCase):
         }
         self.check_example("hardcoded-passwords.py", expect)
 
+    def test_hardcoded_passwords_multiline_line_number(self):
+        """Test B106 line numbers in multiline function calls.
+
+        Regression test for issue #1328: the hardcoded password argument
+        must be reported at the line of the keyword value, not at the line
+        of the call.
+        """
+        self.run_example("hardcoded-passwords-multiline.py")
+        issues = self.b_mgr.get_issue_list()
+        self.assertEqual(2, len(issues))
+        self.assertTrue(
+            issues[0].fname.endswith(
+                "examples/hardcoded-passwords-multiline.py"
+            )
+        )
+        self.assertEqual("B106", issues[0].test_id)
+        self.assertEqual(17, issues[0].lineno)
+        self.assertIn('"blerg"', issues[0].get_code())
+        self.assertEqual("B106", issues[1].test_id)
+        self.assertEqual(26, issues[1].lineno)
+        self.assertIn('"s3cret"', issues[1].get_code())
+
     def test_hardcoded_tmp(self):
         """Test for hard-coded /tmp, /var/tmp, /dev/shm."""
         expect = {
