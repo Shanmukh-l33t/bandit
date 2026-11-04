@@ -609,6 +609,22 @@ class FunctionalTests(testtools.TestCase):
         }
         self.check_example("xml_sax.py", expect)
 
+    def test_xml_remediation_message(self):
+        """Test the remediation text of XML import/call warnings (GH #708).
+
+        The old message told users to call defusedxml.defuse_stdlib(),
+        which never silences bandit findings. The working remediations
+        are "# nosec" annotations and excluding test IDs via
+        configuration, so the messages must recommend those instead.
+        """
+        self.run_example("xml_etree_elementtree.py")
+        issues = self.b_mgr.get_issue_list()
+        self.assertTrue(issues)
+        for issue in issues:
+            self.assertNotIn("defuse_stdlib", issue.text)
+            self.assertIn("# nosec", issue.text)
+            self.assertIn("configuration", issue.text)
+
     def test_httpoxy(self):
         """Test httpoxy vulnerability."""
         expect = {

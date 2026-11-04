@@ -546,8 +546,9 @@ def gen_blacklist():
     xml_msg = (
         "Using {name} to parse untrusted XML data is known to be "
         "vulnerable to XML attacks. Replace {name} with its "
-        "defusedxml equivalent function or make sure "
-        "defusedxml.defuse_stdlib() is called"
+        "defusedxml equivalent function. If this use is intentional, "
+        "silence this warning with \"# nosec\" on the line or by "
+        "excluding the test ID via configuration"
     )
 
     sets.append(

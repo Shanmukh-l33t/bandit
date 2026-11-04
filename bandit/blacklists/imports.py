@@ -67,8 +67,9 @@ B405: import_xml_etree
 ----------------------
 
 Using various methods to parse untrusted XML data is known to be vulnerable to
-XML attacks. Replace vulnerable imports with the equivalent defusedxml package,
-or make sure defusedxml.defuse_stdlib() is called.
+XML attacks. Replace vulnerable imports with the equivalent defusedxml package.
+If the import is intentional, silence this warning with "# nosec" on the import
+line or by excluding the test ID via configuration.
 
 +------+---------------------+------------------------------------+-----------+
 | ID   |  Name               |  Imports                           |  Severity |
@@ -81,8 +82,9 @@ B406: import_xml_sax
 --------------------
 
 Using various methods to parse untrusted XML data is known to be vulnerable to
-XML attacks. Replace vulnerable imports with the equivalent defusedxml package,
-or make sure defusedxml.defuse_stdlib() is called.
+XML attacks. Replace vulnerable imports with the equivalent defusedxml package.
+If the import is intentional, silence this warning with "# nosec" on the import
+line or by excluding the test ID via configuration.
 
 +------+---------------------+------------------------------------+-----------+
 | ID   |  Name               |  Imports                           |  Severity |
@@ -94,8 +96,9 @@ B407: import_xml_expat
 ----------------------
 
 Using various methods to parse untrusted XML data is known to be vulnerable to
-XML attacks. Replace vulnerable imports with the equivalent defusedxml package,
-or make sure defusedxml.defuse_stdlib() is called.
+XML attacks. Replace vulnerable imports with the equivalent defusedxml package.
+If the import is intentional, silence this warning with "# nosec" on the import
+line or by excluding the test ID via configuration.
 
 +------+---------------------+------------------------------------+-----------+
 | ID   |  Name               |  Imports                           |  Severity |
@@ -107,8 +110,9 @@ B408: import_xml_minidom
 ------------------------
 
 Using various methods to parse untrusted XML data is known to be vulnerable to
-XML attacks. Replace vulnerable imports with the equivalent defusedxml package,
-or make sure defusedxml.defuse_stdlib() is called.
+XML attacks. Replace vulnerable imports with the equivalent defusedxml package.
+If the import is intentional, silence this warning with "# nosec" on the import
+line or by excluding the test ID via configuration.
 
 
 +------+---------------------+------------------------------------+-----------+
@@ -121,8 +125,9 @@ B409: import_xml_pulldom
 ------------------------
 
 Using various methods to parse untrusted XML data is known to be vulnerable to
-XML attacks. Replace vulnerable imports with the equivalent defusedxml package,
-or make sure defusedxml.defuse_stdlib() is called.
+XML attacks. Replace vulnerable imports with the equivalent defusedxml package.
+If the import is intentional, silence this warning with "# nosec" on the import
+line or by excluding the test ID via configuration.
 
 +------+---------------------+------------------------------------+-----------+
 | ID   |  Name               |  Imports                           |  Severity |
@@ -297,8 +302,9 @@ def gen_blacklist():
     xml_msg = (
         "Using {name} to parse untrusted XML data is known to be "
         "vulnerable to XML attacks. Replace {name} with the equivalent "
-        "defusedxml package, or make sure defusedxml.defuse_stdlib() "
-        "is called."
+        "defusedxml package. If this import is intentional, silence "
+        "this warning with \"# nosec\" on the import line or by "
+        "excluding the test ID via configuration."
     )
 
     sets.append(
